@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EpoqZeroTaDA.Views.AddToDoItemPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:EpoqZeroTaDA.Models"
+    xmlns:vm="clr-namespace:EpoqZeroTaDA.ViewModels"
+    Title="AddToDoItemPage"
+    x:DataType="vm:ToDoListPageViewModel">
+    <ScrollView Background="#FFFFFF">
+        <VerticalStackLayout Padding="30" Spacing="50">
+            <Label
+                Margin="0,20,0,0"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="TASK DETAILS"
+                TextColor="Black"
+                VerticalOptions="Start" />
+            <Grid
+                x:DataType="vm:ToDoListPageViewModel"
+                RowDefinitions="*,*,*,*,*,*"
+                RowSpacing="40">
+                <Grid Grid.Row="0" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        Text="What is it that you're trying to accomplish?"
+                        TextColor="Black" />
+                    <Editor
+                        Grid.Row="1"
+                        AutoSize="TextChanges"
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        Placeholder="Enter task name"
+                        PlaceholderColor="#5AE4A7"
+                        Text="{Binding NewToDoItem.Title}"
+                        TextColor="#5AE4A7"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid Grid.Row="1" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        Text="By when can you make it happen?"
+                        TextColor="Black" />
+                    <DatePicker
+                        Grid.Row="1"
+                        Date="{Binding NewToDoItem.EndDate}"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Format="d"
+                        HorizontalOptions="Start"
+                        TextColor="#5AE4A7"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid Grid.Row="2" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        Text="Let's describe your task a bit."
+                        TextColor="Black" />
+                    <Editor
+                        Grid.Row="1"
+                        AutoSize="TextChanges"
+                        FontSize="18"
+                        Placeholder="Description of the task"
+                        PlaceholderColor="#5AE4A7"
+                        Text="{Binding NewToDoItem.Description}"
+                        TextColor="#5AE4A7" />
+                </Grid>
+                <Grid Grid.Row="3" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        Text="What is the status of the task?"
+                        TextColor="Black" />
+                    <Picker
+                        x:Name="picker"
+                        Title="Select Status of Task"
+                        Grid.Row="1"
+                        FontSize="18"
+                        SelectedItem="{Binding NewToDoItem.Status}"
+                        TextColor="#5AE4A7">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Open</x:String>
+                                <x:String>Closed</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Grid>
+                <Grid Grid.Row="4" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        Text="Any remarks?"
+                        TextColor="Black" />
+                    <Editor
+                        Grid.Row="1"
+                        AutoSize="TextChanges"
+                        FontSize="18"
+                        Placeholder="Remarks"
+                        PlaceholderColor="#5AE4A7"
+                        Text="{Binding NewToDoItem.Remarks}"
+                        TextColor="#5AE4A7" />
+                </Grid>
+            </Grid>
+            <Grid
+                ColumnDefinitions="*,*"
+                ColumnSpacing="20"
+                ZIndex="4">
+                <Button
+                    Grid.Column="0"
+                    Padding="15"
+                    Background="Black"
+                    Command="{Binding SaveCommand}"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Shadow="{StaticResource WhiteShadow}"
+                    Text="SAVE"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Column="1"
+                    Padding="15"
+                    Background="Black"
+                    Command="{Binding CancelCommand}"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Shadow="{StaticResource WhiteShadow}"
+                    Text="CANCEL"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

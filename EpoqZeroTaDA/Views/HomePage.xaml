@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EpoqZeroTaDA.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:EpoqZeroTaDA.Behaviors"
+    xmlns:models="clr-namespace:EpoqZeroTaDA.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:EpoqZeroTaDA.ViewModels"
+    x:Name="HomePageObject"
+    Title="HomePage"
+    x:DataType="vm:HomePageViewModel">
+    <Grid
+        Padding="20"
+        Background="White"
+        RowDefinitions="Auto,Auto,*">
+        <Grid
+            Grid.Row="1"
+            Margin="0,20,0,20"
+            RowDefinitions="Auto,*,*">
+            <Image
+                Grid.Row="0"
+                Margin="0,30,0,0"
+                HorizontalOptions="Center"
+                Source="epoqzerologowithoutname" />
+            <Label
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="HI TEAM"
+                TextColor="Black"
+                VerticalOptions="Start" />
+            <Label
+                Grid.Row="2"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="EPOQ ZERO"
+                TextColor="Black"
+                VerticalOptions="Start" />
+        </Grid>
+
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            Orientation="Vertical"
+            VerticalOptions="Center">
+            <Grid
+                Padding="40"
+                toolkit:StateContainer.CurrentState="{Binding MyCurrentState}"
+                VerticalOptions="Fill">
+                <toolkit:StateContainer.StateViews>
+                    <Grid toolkit:StateView.StateKey="Loading" VerticalOptions="Center">
+                        <ActivityIndicator
+                            HorizontalOptions="Center"
+                            IsRunning="True"
+                            VerticalOptions="Center"
+                            Color="Black" />
+                    </Grid>
+                    <CollectionView toolkit:StateView.StateKey="Success" ItemsSource="{Binding NewUsers}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                Orientation="Vertical"
+                                Span="2"
+                                VerticalItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout
+                                    Padding="10"
+                                    x:DataType="models:User"
+                                    Spacing="10">
+                                    <VerticalStackLayout.Behaviors>
+                                        <behavior:AnimatedTapGesture Command="{Binding Source={x:Reference HomePageObject}, Path=BindingContext.GoToToDoListPageCommand}" CommandParameter="{Binding}" />
+                                    </VerticalStackLayout.Behaviors>
+                                    <Border
+                                        HeightRequest="100"
+                                        Shadow="{StaticResource WhiteShadow}"
+                                        WidthRequest="100">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="20" />
+                                        </Border.StrokeShape>
+                                        <Image
+                                            Aspect="AspectFill"
+                                            HeightRequest="100"
+                                            Source="{Binding ImageUrl}"
+                                            VerticalOptions="Start"
+                                            WidthRequest="100" />
+                                    </Border>
+                                    <Button
+                                        Background="White"
+                                        Command="{Binding Source={x:Reference HomePageObject}, Path=BindingContext.GoToToDoListPageCommand}"
+                                        CommandParameter="{Binding}"
+                                        CornerRadius="10"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Center"
+                                        LineBreakMode="NoWrap"
+                                        Shadow="{StaticResource WhiteShadow}"
+                                        Text="{Binding Name}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center"
+                                        WidthRequest="90" />
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </toolkit:StateContainer.StateViews>
+            </Grid>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

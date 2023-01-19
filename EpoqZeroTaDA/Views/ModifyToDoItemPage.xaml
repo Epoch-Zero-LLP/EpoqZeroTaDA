@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EpoqZeroTaDA.Views.ModifyToDoItemPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:EpoqZeroTaDA.Models"
+    xmlns:vm="clr-namespace:EpoqZeroTaDA.ViewModels"
+    Title="ModifyToDoItemPage"
+    x:DataType="vm:ToDoListPageViewModel">
+    <ScrollView Background="#FFFFFF">
+        <VerticalStackLayout Padding="30" Spacing="50">
+            <Label
+                Margin="0,20,0,0"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="TASK DETAILS"
+                TextColor="Black"
+                VerticalOptions="Start" />
+            <Grid
+                x:DataType="vm:ToDoListPageViewModel"
+                RowDefinitions="*,*,*,*,*"
+                RowSpacing="40">
+                <Grid Grid.Row="0" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Task Name"
+                        TextColor="Black" />
+                    <Editor
+                        Grid.Row="1"
+                        AutoSize="TextChanges"
+                        FontSize="Medium"
+                        HorizontalOptions="Start"
+                        Placeholder="Task Name"
+                        Text="{Binding NewToDoItem.Title}"
+                        TextColor="#5AE4A7"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid Grid.Row="1" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Deadline"
+                        TextColor="Black" />
+                    <DatePicker
+                        Grid.Row="1"
+                        Date="{Binding NewToDoItem.EndDate}"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Format="d"
+                        HorizontalOptions="Start"
+                        TextColor="#5AE4A7"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid Grid.Row="2" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Task Description"
+                        TextColor="Black" />
+                    <Editor
+                        Grid.Row="1"
+                        AutoSize="TextChanges"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Placeholder="Description of the task"
+                        Text="{Binding NewToDoItem.Description}"
+                        TextColor="#5AE4A7" />
+                </Grid>
+                <Grid Grid.Row="3" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Task Status"
+                        TextColor="Black" />
+                    <Picker
+                        x:Name="picker"
+                        Title="Select Status of Task"
+                        Grid.Row="1"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        SelectedItem="{Binding NewToDoItem.Status}"
+                        TextColor="#5AE4A7">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Open</x:String>
+                                <x:String>Closed</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Grid>
+                <Grid Grid.Row="4" RowDefinitions="Auto,Auto">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Remarks"
+                        TextColor="Black" />
+                    <Entry
+                        Grid.Row="1"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Placeholder="Remarks"
+                        Text="{Binding NewToDoItem.Remarks}"
+                        TextColor="#5AE4A7" />
+                </Grid>
+            </Grid>
+            <Grid ColumnDefinitions="*,*,*" VerticalOptions="End">
+                <Button
+                    Grid.Column="0"
+                    Padding="15"
+                    Background="Black"
+                    Command="{Binding SaveModifiedCommand}"
+                    FontSize="Small"
+                    HorizontalOptions="Center"
+                    Shadow="{StaticResource WhiteShadow}"
+                    Text="SAVE"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Column="1"
+                    Padding="15"
+                    Background="Black"
+                    Command="{Binding CancelCommand}"
+                    FontSize="Small"
+                    HorizontalOptions="Center"
+                    Shadow="{StaticResource WhiteShadow}"
+                    Text="CANCEL"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Column="2"
+                    Padding="15"
+                    Background="Black"
+                    Command="{Binding DeleteCommand}"
+                    FontSize="Small"
+                    HorizontalOptions="Center"
+                    Shadow="{StaticResource WhiteShadow}"
+                    Text="DELETE"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

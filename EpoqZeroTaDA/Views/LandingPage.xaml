@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EpoqZeroTaDA.Views.LandingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="LandingPage">
+    <Grid
+        Padding="20"
+        Background="White"
+        RowDefinitions="Auto,*,*">
+        <Grid
+            Grid.Row="0"
+            Margin="0,150,0,0"
+            HorizontalOptions="Center"
+            RowDefinitions="*,*"
+            VerticalOptions="Center">
+            <Image
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                Source="epoqzerologo" />
+            <Grid
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                RowDefinitions="Auto,Auto">
+                <Label
+                    Grid.Row="0"
+                    Margin="0,5,0,0"
+                    FontSize="48"
+                    HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontAttributes="Bold"
+                                Text="T"
+                                TextColor="Black" />
+                            <Span
+                                FontAttributes="Bold"
+                                Text="a"
+                                TextColor="#A02E44" />
+                            <Span
+                                FontAttributes="Bold"
+                                Text="D"
+                                TextColor="Black" />
+                            <Span
+                                FontAttributes="Bold"
+                                Text="a"
+                                TextColor="#A02E44" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontSize="48"
+                    HorizontalOptions="Center"
+                    Text="App"
+                    TextColor="Black" />
+            </Grid>
+        </Grid>
+        <Button
+            x:Name="LetUsGoButton"
+            Grid.Row="1"
+            Margin="0,0,0,30"
+            Padding="10"
+            Background="White"
+            BorderColor="#A02E44"
+            BorderWidth="1"
+            Clicked="LetUsGoButton_Clicked"
+            HorizontalOptions="Center"
+            Text="Let's Go"
+            TextColor="#A02E44"
+            VerticalOptions="Center">
+            <Button.Shadow>
+                <Shadow
+                    Brush="#A02E44"
+                    Opacity="0.4"
+                    Radius="4"
+                    Offset="0,4" />
+            </Button.Shadow>
+        </Button>
+        <Image
+            Grid.Row="2"
+            HeightRequest="220"
+            HorizontalOptions="Center"
+            Source="team"
+            VerticalOptions="End" />
+    </Grid>
+</ContentPage>

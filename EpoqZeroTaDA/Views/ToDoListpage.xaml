@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EpoqZeroTaDA.Views.ToDoListpage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:EpoqZeroTaDA.Models"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
+    xmlns:tap="clr-namespace:EpoqZeroTaDA.Custom"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:EpoqZeroTaDA.ViewModels"
+    x:Name="ToDoListPageObject"
+    Title="ToDoListpage"
+    x:DataType="vm:ToDoListPageViewModel">
+    <Grid Padding="20" RowDefinitions="*,Auto">
+        <Grid Grid.Row="0" Background="White">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="20">
+                <Label
+                    Grid.Row="0"
+                    Margin="0,30,0,0"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Start"
+                    Text="{Binding CurrentlyFocusedUser.Name, StringFormat='Hi {0}!'}"
+                    TextColor="Black"
+                    VerticalOptions="Start" />
+                <!--<Button
+                    Grid.Column="1"
+                    Margin="0,30,20,20"
+                    Padding="20,10,20,10"
+                    Background="#E86164"
+                    Command="{Binding GoToAddToDoItemPageCommand}"
+                    CornerRadius="20"
+                    FontAttributes="Bold"
+                    FontSize="36"
+                    HorizontalOptions="End"
+                    Shadow="{StaticResource WhiteShadow}"
+                    Text="+"
+                    TextColor="#FFFFFF"
+                    VerticalOptions="Start" />-->
+                <Border
+                    Grid.Row="1"
+                    Margin="0,30,0,0"
+                    Padding="15"
+                    Background="White"
+                    HorizontalOptions="Center"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 20,20">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="#008196"
+                            Opacity="0.4"
+                            Radius="4"
+                            Offset="0,4" />
+                    </Border.Shadow>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="To-Do List"
+                        TextColor="#008196"
+                        VerticalOptions="Center" />
+                </Border>
+                <Grid
+                    Grid.Row="2"
+                    Margin="5"
+                    ColumnDefinitions="*,*,*"
+                    ColumnSpacing="10"
+                    MinimumHeightRequest="60">
+                    <Button
+                        x:Name="CompletedTasksButton"
+                        Grid.Column="0"
+                        Padding="10"
+                        Background="White"
+                        Command="{Binding CompletedTasksButtonClickedCommand}"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalOptions="FillAndExpand"
+                        Shadow="{StaticResource WhiteShadow}"
+                        Text="COMPLETED"
+                        TextColor="Gray"
+                        VerticalOptions="FillAndExpand">
+                        <Button.Triggers>
+                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#008196" />
+                                <Setter Property="TextColor" Value="White" />
+                            </Trigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button
+                        x:Name="AllTasksButton"
+                        Grid.Column="1"
+                        Padding="10"
+                        Background="White"
+                        Command="{Binding AllTasksButtonClickedCommand}"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalOptions="FillAndExpand"
+                        Shadow="{StaticResource WhiteShadow}"
+                        Text="ALL"
+                        TextColor="Gray"
+                        VerticalOptions="FillAndExpand">
+                        <Button.Triggers>
+                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#008196" />
+                                <Setter Property="TextColor" Value="White" />
+                            </Trigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button
+                        x:Name="PendingTasksButton"
+                        Grid.Column="2"
+                        Padding="10"
+                        Background="White"
+                        Command="{Binding PendingTasksButtonClickedCommand}"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalOptions="FillAndExpand"
+                        LineBreakMode="CharacterWrap"
+                        Shadow="{StaticResource WhiteShadow}"
+                        Text="YET TO BE DONE"
+                        TextColor="Gray"
+                        VerticalOptions="FillAndExpand">
+                        <Button.Triggers>
+                            <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#008196" />
+                                <Setter Property="TextColor" Value="White" />
+                            </Trigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
+                <Label
+                    Grid.Row="3"
+                    Margin="10"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    Text="{Binding TypeOfTaskDisplayed, StringFormat='Your {0} Tasks'}"
+                    TextColor="#008196"
+                    VerticalOptions="Center" />
+                <Image
+                    Grid.Row="4"
+                    HorizontalOptions="FillAndExpand"
+                    Source="pic1"
+                    VerticalOptions="FillAndExpand" />
+                <ScrollView
+                    Grid.Row="4"
+                    Margin="0,0,0,10"
+                    Orientation="Vertical">
+                    <Grid toolkit:StateContainer.CurrentState="{Binding MyCurrentState}" VerticalOptions="Fill">
+                        <toolkit:StateContainer.StateViews>
+                            <Grid toolkit:StateView.StateKey="Loading" VerticalOptions="Center">
+                                <ActivityIndicator
+                                    HorizontalOptions="Center"
+                                    IsRunning="True"
+                                    VerticalOptions="Center"
+                                    Color="Black" />
+                            </Grid>
+                            <CollectionView toolkit:StateView.StateKey="Success" ItemsSource="{Binding ToDoItems}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid RowSpacing="5">
+                                            <Border
+                                                Margin="6"
+                                                Padding="15"
+                                                x:DataType="models:ToDoItem"
+                                                Background="White"
+                                                HorizontalOptions="FillAndExpand"
+                                                Shadow="{StaticResource WhiteShadow}"
+                                                Stroke="Transparent"
+                                                StrokeShape="RoundRectangle 10,10">
+                                                <!--<Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToToDoListPageCommand}" Tapped="GoToModifyToDoItemPage" />
+                                </Border.GestureRecognizers>-->
+                                                <Border.Behaviors>
+                                                    <tap:AnimatedTapGesture Command="{Binding Source={x:Reference ToDoListPageObject}, Path=BindingContext.GoToModifyToDoItemPageCommand}" CommandParameter="{Binding}" />
+                                                </Border.Behaviors>
+                                                <StackLayout HorizontalOptions="FillAndExpand">
+                                                    <Label
+                                                        FontAttributes="Bold"
+                                                        FontSize="16"
+                                                        HorizontalOptions="Start"
+                                                        Text="{Binding Title}"
+                                                        TextColor="#008196"
+                                                        VerticalOptions="Center" />
+                                                    <Label
+                                                        FontAttributes="Bold"
+                                                        FontSize="12"
+                                                        HorizontalOptions="Start"
+                                                        Text="{Binding EndDate, StringFormat='{0:D}'}"
+                                                        TextColor="Gray"
+                                                        VerticalOptions="Center" />
+                                                </StackLayout>
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </toolkit:StateContainer.StateViews>
+                    </Grid>
+                </ScrollView>
+            </Grid>
+        </Grid>
+        <Button
+            Grid.Row="1"
+            Padding="20,10,20,10"
+            Background="#E86164"
+            Command="{Binding GoToAddToDoItemPageCommand}"
+            CornerRadius="20"
+            FontAttributes="Bold"
+            FontSize="36"
+            HorizontalOptions="Center"
+            Shadow="{StaticResource WhiteShadow}"
+            Text="+"
+            TextColor="#FFFFFF"
+            VerticalOptions="End" />
+    </Grid>
+</ContentPage>
+

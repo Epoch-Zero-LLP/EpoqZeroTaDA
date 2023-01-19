@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EpoqZeroTaDA.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:EpoqZeroTaDA.ViewModels"
+    x:DataType="vm:MainPageViewModel">
+
+    <ScrollView Background="#FFFFFF">
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25"
+            VerticalOptions="Center">
+            <Border
+                Margin="40,0,40,0"
+                Padding="40"
+                Background="#FFFFFF"
+                Stroke="#EEEEEE"
+                StrokeShape="RoundRectangle 10,10"
+                StrokeThickness="0.3">
+                <Grid RowDefinitions="*,Auto">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="GoButton_Clicked" />
+                    </Grid.GestureRecognizers>
+                    <Image
+                        Grid.Row="0"
+                        HeightRequest="200"
+                        HorizontalOptions="Center"
+                        Source="epoqzerologo"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="EpoqZeroLabel"
+                        Grid.Row="1"
+                        Padding="0"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="Epoq Zero"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                </Grid>
+
+            </Border>
+
+            <!--<Label
+                x:Name="ToDoAppLabel"
+                Margin="0"
+                Padding="0"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                TextColor="#DC5F00"
+                VerticalOptions="Center" />-->
+            <!--<Button
+                x:Name="GoButton"
+                Margin="0,40,0,0"
+                Padding="15"
+                Background="White"
+                BorderColor="Black"
+                BorderWidth="1"
+                Clicked="GoButton_Clicked"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Text="GO!"
+                TextColor="Black"
+                VerticalOptions="End" />-->
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

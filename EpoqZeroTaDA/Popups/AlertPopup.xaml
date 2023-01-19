@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage
+    x:Class="EpoqZeroTaDA.Popups.AlertPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:anim="clr-namespace:Mopups.Animations;assembly=Mopups"
+    xmlns:popup="clr-namespace:Mopups.Pages;assembly=Mopups"
+    Title="AlertPopup">
+    <VerticalStackLayout
+        Padding="20"
+        HorizontalOptions="Fill"
+        VerticalOptions="Center">
+        <Border
+            Padding="25"
+            Background="White"
+            HorizontalOptions="Fill"
+            StrokeShape="RoundRectangle 20"
+            StrokeThickness="0">
+            <Border.Shadow>
+                <Shadow
+                    Brush="Black"
+                    Opacity="0.2"
+                    Radius="18"
+                    Offset="2,2" />
+            </Border.Shadow>
+            <VerticalStackLayout Spacing="10">
+                <Label
+                    x:Name="HeadingLabel"
+                    FontAttributes="Bold"
+                    FontFamily="Bold"
+                    HorizontalOptions="Center"
+                    Text="Pop up!"
+                    TextColor="Black" />
+                <Label
+                    x:Name="DescriptionLabel"
+                    HorizontalOptions="Center"
+                    Text="This is a pop-up."
+                    TextColor="Black" />
+                <Button
+                    x:Name="OkButton"
+                    Margin="0,15,0,0"
+                    Background="#0096AA"
+                    Clicked="OkButton_Clicked"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Fill"
+                    Text="OK"
+                    TextColor="White" />
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</popup:PopupPage>
