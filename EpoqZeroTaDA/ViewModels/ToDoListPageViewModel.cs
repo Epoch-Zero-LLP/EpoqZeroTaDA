@@ -290,6 +290,5 @@ namespace EpoqZeroTaDA.ViewModels
             Shell.Current.GoToAsync("..");
             //var sdfg = await Cancel();
         }
-        //testing commit
     }
 }
